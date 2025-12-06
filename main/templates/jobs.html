@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Opportunities - YouthHub{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <h1 class="mb-4 text-center">Jobs & Internships</h1>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for job in jobs %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ job.title }}</h5>
+                    <p class="card-text">{{ job.description|truncatechars:120 }}</p>
+                    <p class="text-muted">Deadline: {{ job.deadline }} • Location: {{ job.location }}</p>
+                    <a href="/jobs/{{ job.id }}" class="btn btn-primary mt-2">Apply</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No jobs available at the moment.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
+

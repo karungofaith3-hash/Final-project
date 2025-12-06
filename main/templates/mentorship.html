@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Mentorship - YouthHub{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <h1 class="mb-4 text-center">Mentorship Opportunities</h1>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for mentor in mentors %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ mentor.name }}</h5>
+                    <p class="card-text">{{ mentor.expertise }}</p>
+                    <p class="text-muted">{{ mentor.contact_email }}</p>
+                    <a href="/mentorship/{{ mentor.id }}" class="btn btn-primary mt-2">Book Session</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No mentors available at the moment.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
+
+
+
