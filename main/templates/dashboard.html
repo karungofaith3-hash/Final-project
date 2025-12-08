@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard | YouthHub{% endblock %}
+
+{% block content %}
+<div class="container py-5 animate__animated animate__fadeIn">
+    <div class="row mb-5">
+        <div class="col-lg-8">
+            <h1 class="fw-bold mb-2">Welcome back, {{ user.username }}! 👋</h1>
+            <p class="text-muted text-lg">Here's what's happening with your career journey.</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Stats Cards -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100 bg-primary-subtle">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-white p-2 rounded-circle shadow-sm me-3 text-primary">
+                            <i class="bi bi-calendar-check fs-4"></i>
+                        </div>
+                        <h6 class="fw-bold mb-0 text-primary-emphasis">Sessions Booked</h6>
+                    </div>
+                    <h2 class="fw-bold mb-0">{{ bookings.count }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100 bg-success-subtle">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-white p-2 rounded-circle shadow-sm me-3 text-success">
+                            <i class="bi bi-people fs-4"></i>
+                        </div>
+                        <h6 class="fw-bold mb-0 text-success-emphasis">Active Mentors</h6>
+                    </div>
+                    <h2 class="fw-bold mb-0">{{ bookings|length }}</h2> <!-- Simplified logic for demo -->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100 bg-white border">
+                <div class="card-body p-4 d-flex flex-column justify-content-center align-items-center text-center">
+                    <a href="{% url 'jobs' %}" class="btn btn-outline-primary rounded-pill px-4 fw-bold w-100 mb-2">Find
+                        Jobs</a>
+                    <a href="{% url 'mentorship' %}"
+                        class="btn btn-outline-secondary rounded-pill px-4 fw-bold w-100">Find Mentors</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <h4 class="fw-bold mb-4">Your Upcoming Sessions</h4>
+
+            {% if bookings %}
+            <div class="list-group shadow-sm rounded-4 overflow-hidden border-0">
+                {% for booking in bookings %}
+                <div
+                    class="list-group-item p-4 border-start-0 border-end-0 border-top-0 d-md-flex align-items-center justify-content-between hover-bg-light transition-all">
+                    <div class="d-flex align-items-center mb-3 mb-md-0">
+                        {% if booking.mentor.image %}
+                        <img src="{{ booking.mentor.image.url }}" class="rounded-circle me-4 border shadow-sm"
+                            width="60" height="60" style="object-fit: cover;">
+                        {% else %}
+                        <img src="https://i.pravatar.cc/150?u={{ booking.mentor.id }}"
+                            class="rounded-circle me-4 border shadow-sm" width="60" height="60">
+                        {% endif %}
+
+                        <div>
+                            <h5 class="fw-bold mb-1">{{ booking.mentor.name }}</h5>
+                            <p class="text-muted small mb-0">{{ booking.mentor.role }} at {{ booking.mentor.company }}
+                            </p>
+                            <div class="mt-2 text-muted small">
+                                <i class="bi bi-chat-quote me-1"></i> "{{ booking.message|truncatechars:50 }}"
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-md-end mt-3 mt-md-0">
+                        <div class="badge bg-light text-dark border px-3 py-2 rounded-pill mb-2">
+                            <i class="bi bi-calendar-event me-2 text-primary"></i>
+                            {{ booking.date|date:"M d, Y" }}
+                        </div>
+                        <div class="text-muted small fw-bold">
+                            <i class="bi bi-clock me-1"></i> {{ booking.date|date:"h:i A" }}
+                        </div>
+                        <div class="mt-2">
+                            <a href="mailto:{{ booking.mentor.contact_email }}"
+                                class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                Email Mentor
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-5 bg-light rounded-4 border border-dashed">
+                <div class="mb-3 text-muted">
+                    <i class="bi bi-calendar-x fs-1 opacity-50"></i>
+                </div>
+                <h5 class="fw-bold text-muted">No sessions booked yet</h5>
+                <p class="text-muted mb-4">Start your journey by connecting with a mentor.</p>
+                <a href="{% url 'mentorship' %}" class="btn btn-primary rounded-pill px-4 fw-bold">Browse Mentors</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-bg-light:hover {
+        background-color: #f8f9fa;
+    }
+</style>
+{% endblock %}

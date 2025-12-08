@@ -1,173 +1,264 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Home - YouthHub{% endblock %}
+{% block title %}Home | YouthHub{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Hero Gradient specific to home */
+    .hero-section {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%),
+        url("{% static 'images/hero-bg.png' %}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 5rem 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-badge {
+        background-color: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        border-radius: 50rem;
+    }
+
+    .section-title h2 {
+        font-weight: 700;
+        color: var(--text-main);
+    }
+
+    .card {
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        border-color: var(--primary);
+    }
+
+    .card-footer {
+        background-color: transparent;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    .mentor-placeholder {
+        height: 200px;
+        background-color: #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #94a3b8;
+        font-weight: 500;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
 
-<!-- Hero / Intro -->
-<section class="hero-section text-center mb-5">
-    <h2>Unlock your potential</h2>
-    <p>Discover jobs, internships, mentorship, events, and free learning resources — built for youth.</p>
-    <a href="#opportunities" class="btn btn-secondary me-2">Find Opportunities</a>
-    <a href="#events" class="btn btn-secondary">See Upcoming Events</a>
-</section>
+<!-- HERO SECTION -->
+<section class="hero-section text-center position-relative overflow-hidden">
+    <!-- Decorative floating shapes (CSS only) -->
+    <div class="position-absolute top-0 start-0 translate-middle rounded-circle bg-primary opacity-10 blur-3xl animate-float"
+        style="width: 300px; height: 300px; filter: blur(80px); z-index: 1;"></div>
+    <div class="position-absolute bottom-0 end-0 translate-middle rounded-circle bg-secondary opacity-10 blur-3xl animate-float"
+        style="width: 400px; height: 400px; filter: blur(100px); animation-delay: -3s; z-index: 1;"></div>
 
-<!-- Quick Links -->
-<section class="mb-5 text-center">
-    <h2>Quick Links</h2>
-    <div class="quick-links d-flex justify-content-center gap-3 flex-wrap">
-        <a href="#resources" class="btn btn-outline-primary">Resources</a>
-        <a href="#mentors" class="btn btn-outline-primary">Mentors</a>
-        <a href="#opportunities" class="btn btn-outline-primary">Jobs & Internships</a>
-    </div>
-</section>
-
-<!-- Opportunities -->
-<section id="opportunities" class="mb-5">
-    <h2 class="mb-4 text-center">Opportunities</h2>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Internship: Web Developer</h5>
-                    <p class="card-text">Hands-on experience in HTML, CSS, and Python.</p>
-                    <p class="text-muted">Deadline: 2025-12-31 • Location: Kirinyaga</p>
-                    <a href="#" class="btn btn-primary">Apply</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Community Volunteer (Tech Lab)</h5>
-                    <p class="card-text">Support local youth with digital skills training.</p>
-                    <p class="text-muted">Deadline: 2025-12-20 • Location: Nomongo</p>
-                    <a href="#" class="btn btn-primary">Apply</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Junior Data Assistant</h5>
-                    <p class="card-text">Collect and organize community program data.</p>
-                    <p class="text-muted">Deadline: 2026-01-10 • Location: Remote</p>
-                    <a href="#" class="btn btn-primary">Apply</a>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 animate__animated animate__fadeInUp">
+                <span
+                    class="badge bg-white text-primary shadow-sm rounded-pill px-3 py-2 mb-4 d-inline-block fw-bold border animate__animated animate__bounceIn">🚀
+                    Launch Your Career</span>
+                <h1 class="display-3 fw-bold mb-3 lh-sm">
+                    Unlock Your <span class="text-gradient">Potential</span>
+                </h1>
+                <p class="lead text-muted mb-5 fs-4" style="max-width: 650px; margin: 0 auto;">
+                    Discover jobs, internships, mentorship programs, and free learning resources — built specifically
+                    for the next generation of leaders.
+                </p>
+                <div class="d-flex justify-content-center gap-3 animate__animated animate__fadeInUp animate__delay-1s">
+                    <a href="#opportunities" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold btn-glow">Find
+                        Opportunities</a>
+                    <a href="#mentors"
+                        class="btn btn-light btn-lg rounded-pill px-5 py-3 fw-bold shadow-sm hover-lift">Meet
+                        Mentors</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Mentors -->
-<section id="mentors" class="mb-5">
-    <h2 class="mb-4 text-center">Mentors</h2>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Jane Mwangi</h5>
-                    <p class="card-text">Software engineer • Python, web development.</p>
-                    <a href="#" class="btn btn-primary">Book Session</a>
-                </div>
+<!-- STATS SECTION -->
+<section class="py-5 border-bottom glass-effect border-0 shadow-sm"
+    style="margin-top: -50px; position: relative; z-index: 5; max-width: 1000px; margin-left: auto; margin-right: auto; border-radius: 20px;">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-6 col-md-3">
+                <h2 class="fw-bold mb-0 text-primary">500+</h2>
+                <p class="text-muted mb-0 fw-medium">Active Jobs</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="fw-bold mb-0 text-secondary">200+</h2>
+                <p class="text-muted mb-0 fw-medium">Mentors</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="fw-bold mb-0 text-primary">1.5k</h2>
+                <p class="text-muted mb-0 fw-medium">Placed</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="fw-bold mb-0 text-success">Free</h2>
+                <p class="text-muted mb-0 fw-medium">Resources</p>
             </div>
         </div>
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">David Kariuki</h5>
-                    <p class="card-text">Entrepreneur • Small business & finance basics.</p>
-                    <a href="#" class="btn btn-primary">Book Session</a>
+    </div>
+</section>
+
+<!-- OPPORTUNITIES -->
+<section id="opportunities" class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div class="animate__animated animate__fadeInLeft">
+                <h2 class="fw-bold mb-1">Featured Opportunities</h2>
+                <p class="text-muted mb-0">Kickstart your career with top companies.</p>
+            </div>
+            <a href="/jobs/"
+                class="text-primary text-decoration-none fw-semibold hover-underline animate__animated animate__fadeInRight">View
+                All Jobs &rarr;</a>
+        </div>
+
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-md-4 wow animate__animated animate__fadeInUp">
+                <div class="card h-100 border-0 shadow-sm hover-lift rounded-4 overflow-hidden">
+                    <div class="card-body p-4">
+                        <span
+                            class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 mb-3 fw-bold">Internship</span>
+                        <h4 class="card-title fw-bold mb-2">Web Developer Intern</h4>
+                        <p class="card-text text-muted mb-4">Join a fast-paced tech startup and learn modern web
+                            technologies like React and Django.</p>
+                        <div class="d-flex align-items-center text-muted small">
+                            <i class="bi bi-geo-alt me-2 text-primary"></i> Nairobi
+                            <span class="mx-2">•</span>
+                            <i class="bi bi-clock me-2 text-primary"></i> Full-time
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Mary Wanjiru</h5>
-                    <p class="card-text">Creative • Design portfolios & careers in arts.</p>
-                    <a href="#" class="btn btn-primary">Book Session</a>
+
+            <!-- Card 2 -->
+            <div class="col-md-4 wow animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="card h-100 border-0 shadow-sm hover-lift rounded-4 overflow-hidden">
+                    <div class="card-body p-4">
+                        <span
+                            class="badge bg-success-subtle text-success rounded-pill px-3 py-2 mb-3 fw-bold">Volunteer</span>
+                        <h4 class="card-title fw-bold mb-2">Community Tech Trainer</h4>
+                        <p class="card-text text-muted mb-4">Help bridge the digital divide by teaching basic computer
+                            skills to local youth groups.</p>
+                        <div class="d-flex align-items-center text-muted small">
+                            <i class="bi bi-geo-alt me-2 text-success"></i> Kisumu
+                            <span class="mx-2">•</span>
+                            <i class="bi bi-clock me-2 text-success"></i> Part-time
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-4 wow animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="card h-100 border-0 shadow-sm hover-lift rounded-4 overflow-hidden">
+                    <div class="card-body p-4">
+                        <span
+                            class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-3 py-2 mb-3 fw-bold">Entry
+                            Level</span>
+                        <h4 class="card-title fw-bold mb-2">Junior Data Analyst</h4>
+                        <p class="card-text text-muted mb-4">Analyze trends and help businesses make data-driven
+                            decisions. Mathematical background preferred.</p>
+                        <div class="d-flex align-items-center text-muted small">
+                            <i class="bi bi-geo-alt me-2 text-warning"></i> Remote
+                            <span class="mx-2">•</span>
+                            <i class="bi bi-clock me-2 text-warning"></i> Contract
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Events -->
-<section id="events" class="mb-5">
-    <h2 class="mb-4 text-center">Events</h2>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">CV & Interview Clinic</h5>
-                    <p class="text-muted">Date: 2025-12-15 • Kirinyaga Innovation Center</p>
-                    <p>Practical tips, mock interviews, and CV feedback.</p>
-                    <a href="#" class="btn btn-primary">Register</a>
+<!-- MENTORS -->
+<section id="mentors" class="py-5 bg-white border-top">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">Meet Our Mentors</h2>
+                <p class="text-muted mb-0">Get guidance from industry experts.</p>
+            </div>
+            <a href="/mentorship/" class="text-primary text-decoration-none fw-semibold">Find a Mentor &rarr;</a>
+        </div>
+
+        <div class="row g-4">
+            <!-- Mentor 1 -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://i.pravatar.cc/300?img=5" class="card-img-top object-fit-cover" alt="Mentor"
+                        style="height: 250px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold mb-1">Jane Mwangi</h5>
+                        <p class="text-primary small fw-bold mb-3">Senior Software Engineer</p>
+                        <p class="card-text text-muted small">Expert in Python, AI, and Career Development for women in
+                            tech.</p>
+                        <a href="#" class="btn btn-primary btn-sm w-100 mt-3">Book Session</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Intro to Python Workshop</h5>
-                    <p class="text-muted">Date: 2025-12-18 • Nomongo Youth Hub</p>
-                    <p>Beginner-friendly session on Python basics.</p>
-                    <a href="#" class="btn btn-primary">Register</a>
+
+            <!-- Mentor 2 -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://i.pravatar.cc/300?img=11" class="card-img-top object-fit-cover" alt="Mentor"
+                        style="height: 250px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold mb-1">David Kariuki</h5>
+                        <p class="text-primary small fw-bold mb-3">Digital Marketer</p>
+                        <p class="card-text text-muted small">I help young entrepreneurs build their personal brand and
+                            market their skills.</p>
+                        <a href="#" class="btn btn-primary btn-sm w-100 mt-3">Book Session</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Community Hack Day</h5>
-                    <p class="text-muted">Date: 2026-01-05 • Kirinyaga County Hall</p>
-                    <p>Build simple solutions for local challenges.</p>
-                    <a href="#" class="btn btn-primary">Register</a>
+
+            <!-- Mentor 3 -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://i.pravatar.cc/300?img=9" class="card-img-top object-fit-cover" alt="Mentor"
+                        style="height: 250px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold mb-1">Sarah Ochieng</h5>
+                        <p class="text-primary small fw-bold mb-3">Financial Advisor</p>
+                        <p class="card-text text-muted small">Learn how to manage your finances, save, and invest for
+                            your future.</p>
+                        <a href="#" class="btn btn-primary btn-sm w-100 mt-3">Book Session</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Resources -->
-<section id="resources" class="mb-5">
-    <h2 class="mb-4 text-center">Resources</h2>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">CV Template (DOCX)</h5>
-                    <p class="card-text">Clean, editable resume template.</p>
-                    <a href="#" class="btn btn-primary">Download</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Interview Prep Guide (PDF)</h5>
-                    <p class="card-text">Common questions and practice answers.</p>
-                    <a href="#" class="btn btn-primary">Download</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Study Planner (PDF)</h5>
-                    <p class="card-text">Weekly schedule and habit tracker.</p>
-                    <a href="#" class="btn btn-primary">Download</a>
-                </div>
-            </div>
-        </div>
+<!-- CTA -->
+<section class="py-5 text-center text-white" style="background-color: var(--primary);">
+    <div class="container">
+        <h2 class="fw-bold mb-3">Ready to Start Your Journey?</h2>
+        <p class="lead mb-4" style="opacity: 0.9;">Join thousands of youth who are taking control of their future today.
+        </p>
+        <a href="/register/" class="btn btn-light text-primary fw-bold btn-lg">Create Free Account</a>
     </div>
 </section>
 
 {% endblock %}
-
-
-
-
-
-

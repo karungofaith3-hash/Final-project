@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up | YouthHub{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-5">
+                    <h2 class="fw-bold text-center mb-4 text-primary">Create Account</h2>
+                    <p class="text-center text-muted mb-4">Join our community today.</p>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <!-- Manually rendering for Bootstrap since crispy might not be installed -->
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Username</label>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                            <div class="text-danger small mt-1">{{ form.username.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Email Address</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                            <div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Password 1 -->
+                        <!-- Note: UserCreationForm uses 'topic associated' naming often, but usually it renders visible fields. 
+                             Safest way without knowing exact field names (new_password1 vs password1) is iterating visible fields 
+                             OR assuming standard Django UserCreationForm names. 
+                             Standard is usually 'username', 'email' (custom), 'new_password1', 'new_password2'. 
+                             Let's try standard names but keep a fallback if it fails? No, templates die silently.
+                             
+                             Better approach: Iterate but skip the ones we already rendered? 
+                             Actually, let's stick to the loop but with CUSTOM rendering logic inside.
+                        -->
+
+                        {% for field in form %}
+                        {% if field.name != 'username' and field.name != 'email' %}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">
+                                {% if 'password' in field.name %}Password{% else %}{{ field.label }}{% endif %}
+                            </label>
+                            {{ field }}
+                            {% if field.help_text %}
+                            <div class="form-text text-muted small" style="font-size: 0.75rem;">{{ field.help_text }}
+                            </div>
+                            {% endif %}
+                            {% for error in field.errors %}
+                            <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg fw-bold">Sign Up</button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <small>Already have an account? <a href="/login/"
+                                class="text-decoration-none fw-bold">Login</a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Simple script to add bootstrap classes to Django default widgets -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            if (input.type !== 'checkbox' && input.type !== 'radio') {
+                input.classList.add('form-control');
+            } else {
+                input.classList.add('form-check-input');
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ job.title }} | YouthHub{% endblock %}
+
+{% block content %}
+<div class="container py-5 animate__animated animate__fadeIn">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Back Link -->
+            <a href="{% url 'jobs' %}" class="text-decoration-none text-muted mb-4 d-inline-block hover-lift">
+                <i class="bi bi-arrow-left me-1"></i> Back to Jobs
+            </a>
+
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-bottom border-light p-4">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <div>
+                            <span class="badge rounded-pill px-3 py-2 mb-2
+                                {% if job.job_type == 'Internship' %}bg-primary-subtle text-primary border border-primary-subtle
+                                {% elif job.job_type == 'Full-time' %}bg-success-subtle text-success border border-success-subtle
+                                {% elif job.job_type == 'Part-time' %}bg-warning-subtle text-warning-emphasis border border-warning-subtle
+                                {% elif job.job_type == 'Contract' %}bg-info-subtle text-info-emphasis border border-info-subtle
+                                {% else %}bg-secondary-subtle text-secondary{% endif %}">
+
+                                <i class="bi me-1
+                                    {% if job.job_type == 'Internship' %}bi-mortarboard-fill
+                                    {% elif job.job_type == 'Full-time' %}bi-briefcase-fill
+                                    {% elif job.job_type == 'Part-time' %}bi-clock-fill
+                                    {% elif job.job_type == 'Contract' %}bi-file-text-fill
+                                    {% else %}bi-tag-fill{% endif %}">
+                                </i>
+                                {{ job.job_type }}
+                            </span>
+                            <h1 class="fw-bold mb-1">{{ job.title }}</h1>
+                            <p class="text-muted fw-medium fs-5 mb-0">{{ job.company }} • {{ job.location }}</p>
+                        </div>
+                        <div class="text-end">
+                            <span class="d-block text-muted small fw-bold text-uppercase tracking-wide">Deadline</span>
+                            <span class="d-block fs-5 fw-bold text-dark">{{ job.deadline|date:"M d, Y" }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+                    <h4 class="fw-bold mb-3 text-dark">Job Description</h4>
+                    <p class="text-muted leading-relaxed mb-5" style="line-height: 1.8;">
+                        {{ job.description|linebreaksbr }}
+                    </p>
+
+                    <div class="card bg-light border-0 rounded-3 p-4 mb-5">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-info-circle-fill text-primary fs-3 me-3"></i>
+                            <div>
+                                <h6 class="fw-bold mb-1">How to Apply</h6>
+                                <p class="mb-0 text-muted small">Please send your resume and cover letter to <a
+                                        href="mailto:careers@{{ job.company|slugify }}.com"
+                                        class="fw-bold text-primary">careers@{{ job.company|slugify }}.com</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid d-md-flex gap-3">
+                        <a href="mailto:careers@{{ job.company|slugify }}.com"
+                            class="btn btn-primary btn-lg rounded-pill px-5 fw-bold btn-glow">
+                            Apply Now <i class="bi bi-send-fill ms-2"></i>
+                        </a>
+                        <button class="btn btn-outline-secondary btn-lg rounded-pill px-4 fw-bold">
+                            <i class="bi bi-share-fill me-2"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,29 +1,73 @@
-{% extends 'main/base.html' %}
+{% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Opportunities - YouthHub{% endblock %}
+{% block title %}Jobs | YouthHub{% endblock %}
 
 {% block content %}
+<div class="container py-5">
+    <!-- Header & Search -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-6">
+            <h1 class="fw-bold mb-2">Available Opportunities</h1>
+            <p class="text-muted">Explore the latest jobs and internships tailored for you.</p>
+        </div>
+        <div class="col-md-6">
+            <form class="d-flex gap-2">
+                <input class="form-control" type="search" placeholder="Search jobs, skills, or location..."
+                    aria-label="Search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
 
-<section class="py-5">
-    <h1 class="mb-4 text-center">Jobs & Internships</h1>
-
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% if jobs %}
+    <div class="row g-4">
         {% for job in jobs %}
-        <div class="col">
-            <div class="card h-100 shadow-sm">
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 transition-all hover-lift">
                 <div class="card-body">
-                    <h5 class="card-title">{{ job.title }}</h5>
-                    <p class="card-text">{{ job.description|truncatechars:120 }}</p>
-                    <p class="text-muted">Deadline: {{ job.deadline }} • Location: {{ job.location }}</p>
-                    <a href="/jobs/{{ job.id }}" class="btn btn-primary mt-2">Apply</a>
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge rounded-pill px-3 py-2
+                            {% if job.job_type == 'Internship' %}bg-primary-subtle text-primary border border-primary-subtle
+                            {% elif job.job_type == 'Full-time' %}bg-success-subtle text-success border border-success-subtle
+                            {% elif job.job_type == 'Part-time' %}bg-warning-subtle text-warning-emphasis border border-warning-subtle
+                            {% elif job.job_type == 'Contract' %}bg-info-subtle text-info-emphasis border border-info-subtle
+                            {% else %}bg-secondary-subtle text-secondary{% endif %}">
+
+                            <i class="bi me-1
+                                {% if job.job_type == 'Internship' %}bi-mortarboard-fill
+                                {% elif job.job_type == 'Full-time' %}bi-briefcase-fill
+                                {% elif job.job_type == 'Part-time' %}bi-clock-fill
+                                {% elif job.job_type == 'Contract' %}bi-file-text-fill
+                                {% else %}bi-tag-fill{% endif %}">
+                            </i>
+                            {{ job.job_type }}
+                        </span>
+                        <small class="text-muted">Deadline: {{ job.deadline }}</small>
+                    </div>
+
+                    <h5 class="card-title fw-bold mb-1">{{ job.title }}</h5>
+                    <p class="text-primary fw-medium mb-3">{{ job.company }}</p>
+
+                    <p class="card-text text-muted mb-4">{{ job.description|truncatewords:20 }}</p>
+
+                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                        <span class="text-muted small"><i class="bi bi-geo-alt me-1"></i>{{ job.location }}</span>
+                        <a href="{% url 'job_detail' job.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
                 </div>
             </div>
         </div>
-        {% empty %}
-        <p class="text-center">No jobs available at the moment.</p>
         {% endfor %}
     </div>
-</section>
-
+    {% else %}
+    <div class="text-center py-5">
+        <div class="mb-3 text-muted">
+            <i class="bi bi-briefcase fs-1"></i>
+        </div>
+        <h3>No jobs found matching your criteria.</h3>
+        <p class="text-muted">Try adjusting your search or check back later.</p>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
-

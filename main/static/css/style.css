@@ -1,108 +1,258 @@
-/* ------------------ General ------------------ */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
-    line-height: 1.6;
+/* -----------------------------
+   GLOBAL RESET & BASE STYLES
+------------------------------ */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* ------------------ Navbar ------------------ */
-.navbar-nav .nav-link {
+/* -----------------------------
+   BACKGROUND
+------------------------------ */
+body {
+    background:
+        linear-gradient(rgba(7, 22, 44, 0.88), rgba(7, 22, 44, 0.88)),
+        url("../images/bg.jpg") no-repeat center center / cover;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+/* -----------------------------
+   NAVBAR
+------------------------------ */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 80px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #00d9ff;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    text-decoration: none;
     font-weight: 500;
-    margin-right: 10px;
-    transition: color 0.3s;
+    color: #ffffff;
+    transition: color 0.3s ease;
 }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-    color: #ffc107 !important;
+.nav-links a:hover {
+    color: #00d9ff;
 }
 
-/* ------------------ Hero Section ------------------ */
+/* -----------------------------
+   MAIN CONTENT
+------------------------------ */
+.content {
+    padding: 0 80px 80px;
+}
+
+/* -----------------------------
+   HERO SECTION
+------------------------------ */
 .hero-section {
-    background: linear-gradient(135deg, #007bff, #00c6ff);
-    color: #fff;
-    padding: 60px 20px;
-    border-radius: 10px;
+    max-width: 850px;
+    margin: 130px auto 90px;
     text-align: center;
 }
 
-.hero-section h1,
-.hero-section h2 {
+.hero-section h1 {
+    font-size: 52px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .hero-section p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
+    font-size: 18px;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 35px;
 }
 
-.hero-section .btn {
-    margin: 5px;
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
 }
 
-/* ------------------ Cards ------------------ */
-.card {
-    border-radius: 10px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-/* Card titles */
-.card-title {
+/* -----------------------------
+   BUTTONS
+------------------------------ */
+.btn {
+    display: inline-block;
+    border-radius: 30px;
+    padding: 12px 32px;
     font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
-/* Card text */
-.card-text {
-    font-size: 0.95rem;
+.primary-btn {
+    background: #00d9ff;
+    color: #002b36;
 }
 
-/* ------------------ Buttons ------------------ */
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    transition: background-color 0.3s;
+.primary-btn:hover {
+    background: #ffffff;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+.outline-btn {
+    border: 2px solid #00d9ff;
+    color: #00d9ff;
 }
 
-/* ------------------ Footer ------------------ */
-footer {
-    background-color: #212529;
-    color: #fff;
+.outline-btn:hover {
+    background: #00d9ff;
+    color: #002b36;
+}
+
+/* -----------------------------
+   GLASS SECTIONS
+------------------------------ */
+.glass-section {
+    background: rgba(255, 255, 255, 0.08);
+    margin-bottom: 70px;
+    padding: 55px;
+    border-radius: 22px;
+    backdrop-filter: blur(18px);
+}
+
+/* -----------------------------
+   SECTION TITLES
+------------------------------ */
+.section-title {
     text-align: center;
-    padding: 20px 0;
-    margin-top: 50px;
+    font-size: 34px;
+    margin-bottom: 25px;
+    color: #00d9ff;
 }
 
-footer p {
-    margin: 5px 0;
+/* -----------------------------
+   GRID LAYOUT
+------------------------------ */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    margin-top: 30px;
 }
 
-/* ------------------ Sections ------------------ */
-section {
-    padding: 40px 0;
+/* -----------------------------
+   CARDS
+------------------------------ */
+.glass-card {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Quick links buttons */
-.quick-links .btn {
-    margin: 5px;
+.glass-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 30px rgba(0,0,0,0.4);
 }
 
-/* ------------------ Responsive ------------------ */
+.glass-card h3 {
+    color: #00d9ff;
+    margin-bottom: 12px;
+}
+
+.glass-card p {
+    margin-bottom: 12px;
+    opacity: 0.9;
+}
+
+.glass-card small {
+    display: block;
+    margin-bottom: 18px;
+    opacity: 0.7;
+}
+
+/* -----------------------------
+   QUICK LINK CHIPS
+------------------------------ */
+.quick-links {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.chip {
+    padding: 10px 24px;
+    border-radius: 30px;
+    border: 1.5px solid #00d9ff;
+    color: #00d9ff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.chip:hover {
+    background: #00d9ff;
+    color: #002b36;
+}
+
+/* -----------------------------
+   FOOTER
+------------------------------ */
+footer {
+    text-align: center;
+    padding: 22px;
+    background: rgba(0,0,0,0.45);
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+/* -----------------------------
+   RESPONSIVE DESIGN
+------------------------------ */
 @media (max-width: 768px) {
-    .hero-section {
-        padding: 40px 15px;
+    .navbar {
+        padding: 18px 30px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .content {
+        padding: 0 30px 60px;
+    }
+
+    .hero-section h1 {
+        font-size: 38px;
+    }
+
+    .hero-section p {
+        font-size: 16px;
+    }
+
+    .glass-section {
+        padding: 35px;
     }
 }
+
+
+

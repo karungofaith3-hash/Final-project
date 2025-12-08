@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book Session | YouthHub{% endblock %}
+
+{% block content %}
+<div class="container py-5 animate__animated animate__fadeIn">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <a href="{% url 'mentorship' %}" class="text-decoration-none text-muted mb-4 d-inline-block hover-lift">
+                <i class="bi bi-arrow-left me-1"></i> Back to Mentors
+            </a>
+
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <div class="card-header bg-primary text-white p-4 text-center">
+                    <h3 class="fw-bold mb-1">Book a Session</h3>
+                    <p class="mb-0 opacity-75">with {{ mentor.name }}</p>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        {% if mentor.image %}
+                        <img src="{{ mentor.image.url }}" alt="{{ mentor.name }}"
+                            class="rounded-circle mb-3 border border-4 border-light shadow-sm" width="100" height="100"
+                            style="object-fit: cover;">
+                        {% else %}
+                        <img src="https://i.pravatar.cc/150?u={{ mentor.id }}" alt="{{ mentor.name }}"
+                            class="rounded-circle mb-3 border border-4 border-light shadow-sm" width="100" height="100">
+                        {% endif %}
+                        <h5 class="fw-bold">{{ mentor.name }}</h5>
+                        <p class="text-muted small">{{ mentor.role }} at {{ mentor.company }}</p>
+                    </div>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Select Date & Time</label>
+                            <input type="datetime-local" name="date" class="form-control" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Message / Topic</label>
+                            <textarea name="message" rows="4" class="form-control"
+                                placeholder="What would you like to discuss?" required></textarea>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold btn-glow">
+                                Confirm Booking
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
